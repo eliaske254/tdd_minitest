@@ -1,16 +1,23 @@
-require "test_helper"
+require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @project = projects(:one)
+    sign_in users(:regular)
   end
 
-  test "should get index" do
+  test 'redirected if not logged in' do
+    sign_out :user
+    get projects_url
+    assert_response :redirect
+  end
+
+  test 'should get index' do
     get projects_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_project_url
     assert_response :success
   end
