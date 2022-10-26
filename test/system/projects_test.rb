@@ -3,9 +3,11 @@ require 'application_system_test_case'
 class ProjectsTest < ApplicationSystemTestCase
   setup do
     @project = projects(:one)
+    sign_in users(:regular)
   end
 
   test 'visiting the index' do
+
     visit projects_url
     assert_selector 'h1', text: 'Projects'
   end
@@ -34,7 +36,9 @@ class ProjectsTest < ApplicationSystemTestCase
 
   test 'should destroy Project' do
     visit project_url(@project)
-    click_on 'Destroy this project', match: :first
+    page.accept_confirm do
+      click_on 'Destroy this project', match: :first
+    end
 
     assert_text 'Project was successfully destroyed'
   end
