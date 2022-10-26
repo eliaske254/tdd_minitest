@@ -1,9 +1,9 @@
 class Rating < ApplicationRecord
   belongs_to :person
-  validates :score, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10 }
+  validates :score, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 10}
 
   def promoter?
-    [9,10].include?(score)
+    [9, 10].include?(score)
     # score >= 9 && score <= 10
   end
 
@@ -19,5 +19,4 @@ class Rating < ApplicationRecord
     person.update(score: score)
     # person.update(score:)
   end
-
 end
