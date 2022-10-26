@@ -16,7 +16,8 @@ class Rating < ApplicationRecord
   end
 
   after_create do
-    person.update(score: score)
+    # person.update(score: score)
     # person.update(score:)
+    UpdatePersonJob.perform_later(person_id, score)
   end
 end
